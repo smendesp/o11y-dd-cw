@@ -4,7 +4,7 @@ Esse projeto tem como objetivo gerar métricas para DataDog via API e para Cloud
 
 Apesar do envio de métricas para DataDog estar mais maduto, mesmo assim é bem simples. Usando o endpoint series da API do DataDog.
 
-No cloudWath, é basicamente um count.
+No CloudWatch, é basicamente um count.
 
 
 ## Usando a lib no AWS Glue
@@ -20,7 +20,7 @@ Preferencialmente usem compactação zip.
 
 É necessário criar um bucket S3 para que gravado o módulo python em zip (DataObservability.zip).
 
-Quando cliado, faça o uploado do DataObservability.zip, para o bucket. 
+Quando criado, faça o uploado do DataObservability.zip, para o bucket. 
 
 Quando for referenciar o módulo no Glue Job, use a S3 URI.
 
