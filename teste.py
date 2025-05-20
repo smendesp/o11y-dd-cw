@@ -1,40 +1,31 @@
-# from DataObservability.Metrics.cloudwatch import CloudWatch
-from DataObservability.Metrics.datadog_class import DataDog
-
-# from DataObservability.DataQuality.glue import Glue
-
-from datetime import datetime
-import random
+from DataObservability.Metrics.datadog import config, series, reset_start_time
 import time
-
-# cw = CloudWatch()
-# glue = Glue()
+import random
 
 
-datadog = DataDog(job_name="entregas_full", tags=["env:local"])
-
-# datadog.gauge('teste_gauge')
-#
-
-now = datetime.now()
-ts = datetime.timestamp(now)
-
-print(int(ts))
-print(datetime.fromtimestamp(int(ts)))
+config(job_name="entregas_full", tags=["env:local"], retry=2)
 
 success = random.randint(0, 1)
 
-points = [{"timestamp": int(ts), "value": 1}]
 resources = [{"name": "glue_job_teste", "type": "glue_job_teste"}]
 tags = ["lab:true"]
 
+
+@series(metric="execution.success.count", resources=resources, tags=tags)
+def f1(nome, sobrenome):
+    #time.sleep(5)
+    print(f"success -> {nome} - {sobrenome}")
+
+
+@series(metric="execution.fail.count", resources=resources, tags=tags)
+def f2(nome):
+    print(f"fail -> {nome}")
+
+
 if success == 1:
-    metric_name = "execution.success.count"
-    datadog.series(metric=metric_name, points=points, resources=resources, tags=tags)
+    f1(nome="silvio", sobrenome="mendes")
 
 if success == 0:
-    metric_name = "execution.fail.count"
-    datadog.series(metric=metric_name, points=points, resources=resources, tags=tags)
-
-time.sleep(2)
+    reset_start_time()
+    f2("silvio")
 
