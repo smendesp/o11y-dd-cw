@@ -44,8 +44,8 @@ logger = logging.logger
 class Config:
 
     def __init__(self, job_name: str = "", tags: list = [], preffix: str = ""):
-        API_KEY = "d618822854902d8c67fc42ae858f6543"
-        APP_KEY = "7b859c75b0517e22d80181d24ba21d7f572ae82e"
+        API_KEY = ""
+        APP_KEY = ""
 
         self.retry = 3
         self.time_start = datetime.now()
